@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register - Face Recognition</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #eef4f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+      max-width: 700px;
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      margin: 40px auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    video, canvas {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .btn-primary {
+      background-color: #004080;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #0066cc;
+    }
+
+    #message {
+      text-align: center;
+      font-weight: 500;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="text-center mb-4">Employee Registration</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <form id="register-form" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label for="employee_name" class="form-label">Employee Name</label>
+        <input type="text" name="employee_name" class="form-control" id="employee_name" required>
+      </div>
+      <div class="col-md-6">
+        <label for="employee_id" class="form-label">Employee ID</label>
+        <input type="text" name="employee_id" class="form-control" id="employee_id" required>
+      </div>
+
+      <div class="col-md-6">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" id="email" required>
+      </div>
+      <div class="col-md-6">
+        <label for="mobile" class="form-label">Mobile</label>
+        <input type="text" name="mobile" class="form-control" id="mobile" required>
+      </div>
+
+      <div class="col-md-12">
+        <label for="division" class="form-label">Division</label>
+        <select name="division" id="division" class="form-select" required>
+          <option value="">Select Division</option>
+          <option value="CCN">CCN</option>
+          <option value="RPD">RPD</option>
+          <option value="FPD">FPD</option>
+          <option value="GT">GT</option>
+          <option value="Others">Others</option>
+        </select>
+      </div>
+
+      <div class="col-md-12">
+        <label class="form-label">Upload Photo (optional)</label>
+        <input type="file" name="employee_image" class="form-control" accept="image/*">
+      </div>
+
+      <div class="col-md-12 camera-container">
+        <label class="form-label">Or Capture Photo:</label>
+        <video id="video" autoplay></video>
+        <button type="button" class="btn btn-outline-primary mt-2" onclick="captureFace()">Capture</button>
+        <canvas id="canvas" width="300" height="200" class="d-none"></canvas>
+        <input type="hidden" name="captured_face" id="captured_face">
+      </div>
+
+      <div class="col-12 text-center mt-3">
+        <button type="submit" class="btn btn-primary px-5">Register</button>
+      </div>
+    </div>
+  </form>
+
+  <div id="message" class="text-danger mt-3"></div>
+</div>
+
+<script>
+  // Activate webcam
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+      document.getElementById('video').srcObject = stream;
+    })
+    .catch(error => {
+      document.getElementById('message').innerText = "Could not access webcam.";
+    });
+
+  // Capture face function
+  function captureFace() {
+    const canvas = document.getElementById('canvas');
+    const video = document.getElementById('video');
+    const context = canvas.getContext('2d');
+    canvas.classList.remove("d-none");
+
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const dataUrl = canvas.toDataURL('image/jpeg');
+    document.getElementById('captured_face').value = dataUrl;
+    document.getElementById('message').innerText = "Face captured successfully!";
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+
+<div class="container text-center mt-5">
+    <h1 class="mb-4">Employee Attendance System</h1>
+
+    <div class="btn-group-vertical w-50 mx-auto" role="group" aria-label="Dashboard Buttons">
+        <a href="{% url 'register' %}" class="btn btn-primary btn-lg mb-3">Register</a>
+        <a href="{% url 'login' %}" class="btn btn-secondary btn-lg mb-3">Login</a>
+        <a href="{% url 'attendance' %}" class="btn btn-info btn-lg mb-3">View Attendance</a>
+        <a href="{% url 'mark_attendance' %}" class="btn btn-success btn-lg">Mark Attendance</a>
+    </div>
+</div>
+
+</body>
+</html> {% endcomment %}
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    
+    <!-- Custom Responsive CSS -->
+    <style>
+        body {
+            background: linear-gradient(to right, #f7f8fc, #e0eafc);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dashboard-container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .btn-group-vertical .btn {
+            font-size: 18px;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-group-vertical .btn:hover {
+            transform: scale(1.02);
+            opacity: 0.95;
+        }
+
+        @media (max-width: 576px) {
+            .dashboard-container {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .btn-group-vertical .btn {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="dashboard-container text-center">
+    <h1>Employee Attendance System</h1>
+
+    <div class="btn-group-vertical w-100" role="group" aria-label="Dashboard Buttons">
+        <a href="{% url 'register' %}" class="btn btn-primary mb-3">Register</a>
+        <a href="{% url 'login' %}" class="btn btn-secondary mb-3">Login</a>
+        <a href="{% url 'attendance' %}" class="btn btn-info mb-3">View Attendance</a>
+        <a href="{% url 'mark_attendance' %}" class="btn btn-success">Mark Attendance</a>
+    </div>
+</div>
+
+</body>
+</html> {% endcomment %}
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+    <!-- Custom Responsive CSS -->
+    <style>
+        body {
+            background-image: url("{% static 'logo-images/BackgroundCRRI.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dashboard-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .logo {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .btn-group-vertical .btn {
+            font-size: 18px;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-group-vertical .btn:hover {
+            transform: scale(1.02);
+            opacity: 0.95;
+        }
+
+        @media (max-width: 576px) {
+            .dashboard-container {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .btn-group-vertical .btn {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="dashboard-container text-center">
+    <!-- Organization Logo -->
+    <img src="{% static 'logo-images/Crrilogo.png' %}" alt="Organization Logo" class="logo">
+
+    <h1>Employee Attendance System</h1>
+
+    <div class="btn-group-vertical w-100" role="group" aria-label="Dashboard Buttons">
+        <a href="{% url 'register' %}" class="btn btn-primary mb-3">Register</a>
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-info mb-3">Admin Login</a>
+        <a href="{% url 'mark_in' %}" class="btn btn-success mb-3">Mark In</a>
+        <a href="{% url 'mark_out' %}" class="btn btn-danger mb-3">Mark Out</a>
+
+    </div>
+</div>
+</body>
+</html> 
+
+
+
